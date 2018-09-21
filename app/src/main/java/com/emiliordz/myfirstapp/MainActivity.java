@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView tv = findViewById(R.string.num_cuenta);
+        TextView tv = findViewById(R.string.NumCuenta);
         tv.setText("416074642");
     }
 }
