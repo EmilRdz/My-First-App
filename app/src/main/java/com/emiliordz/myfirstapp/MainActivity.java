@@ -2,6 +2,7 @@ package com.emiliordz.myfirstapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView tv = findViewById(R.string.<id num_cuenta>);
+        TextView tv = findViewById(R.string.num_cuenta);
         tv.setText("416074642");
     }
 }
