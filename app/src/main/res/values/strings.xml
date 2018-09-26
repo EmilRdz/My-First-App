@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My First App</string>
     <string name="num_cuenta">416074642</string>
+    <string name="localdatetime_now_tostring">LocalDateTime.now().ToString()</string>
 </resources>
