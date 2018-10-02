@@ -1,12 +1,9 @@
 package com.emiliordz.myfirstapp;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import java.time.LocalTime;
 
 public class MainActivity extends AppCompatActivity {
     private final static String TEXT_VIEW_KEY = "TEXT_VIEW_KEY";
@@ -16,38 +13,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
 
         final TextView tv = findViewById(R.id.textView);
-        final Button btn=findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SegundaActividad.class);
-                intent.putExtra(EXTRA_MESSAGE, "Mensaje");
-                startActivity(intent);
-                tv.setText(LocalTime.now().toString());
+        final EditText editText = findViewById(R.id.withText);
+        if(Intent.ACTION_SEND.equals(action)&&type!=null){
+            String extraText = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+            if (extraText != null) {
+                editText.setText(extraText);
             }
-        });
-        if (savedInstanceState!=null) {
-            getExtraMessage = savedInstanceState.getString(EXTRA_MESSAGE);
         }
-        setContentView(R.layout.activity_main);
-        mTextView = (TextView) findViewById(R.id.textView);
-        }
-
-
-        @Override
-        public void onRestoreInstanceState(Bundle savedInstanceState) {
-            final TextView tv = findViewById(R.id.textView);
-            tv.setText(savedInstanceState.getString(TEXT_VIEW_KEY));
-        }
-        @Override
-        public void onSaveInstanceState(Bundle outstate) {
-            final TextView tv = findViewById(R.id.textView);
-            outstate.putString(TEXT_VIEW_KEY,tv.getText().toString());
-            super.onSaveInstanceState(outstate);
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                String link = intent.getStringExtra(Intent.EXTRA_TEXT);
+                if (link!= null) {
+                    editText.setText(link);
+                }
+            }
         }
     }
+}
