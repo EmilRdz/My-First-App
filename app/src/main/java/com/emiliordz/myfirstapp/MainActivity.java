@@ -1,39 +1,45 @@
 package com.emiliordz.myfirstapp;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    private final static String TEXT_VIEW_KEY = "TEXT_VIEW_KEY";
-    public static final String  EXTRA_MESSAGE = "EXTRA_MESSAGE";
-    TextView mTextView;
-    String getExtraMessage;
+    private final static int IMAGE_WIDTH = 400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
 
-        final TextView tv = findViewById(R.id.textView);
-        final EditText editText = findViewById(R.id.withText);
-        if(Intent.ACTION_SEND.equals(action)&&type!=null){
-            String extraText = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-            if (extraText != null) {
-                editText.setText(extraText);
-            }
-        }
+        final ImageView imageView = findViewById(R.id.image);
+        Uri imageUri = null;
         if (Intent.ACTION_SEND.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                String link = intent.getStringExtra(Intent.EXTRA_TEXT);
-                if (link!= null) {
-                    editText.setText(link);
+            if (type.startsWith("image/")) {
+                imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                if (imageUri != null) {
+                    try {
+                        Bitmap bitmap = ImageUtils.getScaledBitmapFromUri(getApplicationContext(), imageUri, IMAGE_WIDTH);
+                        imageView.setImageBitmap(bitmap);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("image/");
+
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        startActivity(sharingIntent);
     }
 }

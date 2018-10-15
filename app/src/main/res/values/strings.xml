@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">My First App</string>
-    <string name="num_cuenta">416074642</string>
-    <string name="btn">LocalTime.now().toString()</string>
     <string name="compartir" />
 </resources>
