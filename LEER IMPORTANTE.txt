@@ -1,0 +1,11 @@
+Hola.
+
+Asesor, he borrando la SegundaActividad.java, pero al momento de hacer los commits no pude borrarla. Sólo comento esto. 
+Por cualquier duda. Y si puede me ayudé con el proceso para borrar la SegundaActividad.java con sus configuraciones dentro
+del código de la app en este repositorio.
+
+Eso sería todo. Gracias. Hasta luego.
+
+
+
+Atentamente, Emilio Rodríguez Álvarez.
