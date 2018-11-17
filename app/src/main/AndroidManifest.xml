@@ -23,7 +23,8 @@
                 <data android:mimeType="image/ " />
             </intent-filter>
         </activity>
-        <activity android:name=".ImageUtils"></activity>
+        <activity android:name=".ImageUtils" />
+        <activity android:name=".Worker"></activity>
     </application>
 
 </manifest>

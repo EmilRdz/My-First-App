@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         String action = intent.getAction();
         String type = intent.getType();
 
-        final ImageView imageView = findViewById(R.id.image);
+        final ImageView imageView = findViewById(R.id.iv);
         Uri imageUri = null;
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if (type.startsWith("image/")) {
@@ -33,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        }
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if (type.startsWith("image/")) {
+                imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                if (imageUri != null) {
+                    new Worker(imageView).execute(imageUri);
                 }
             }
         }
